@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, Menu, BrowserWindow} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -48,3 +48,17 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+const menu = Menu.buildFromTemplate([
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        role: 'copy',
+        // This works on Electron v3 but not on Electron v4.0.0-beta.9
+        accelerator: 'Control+Shift+C',
+      }
+    ]
+  },
+]);
+app.setApplicationMenu(menu);
